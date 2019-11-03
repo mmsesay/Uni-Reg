@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- tailwind css -->
+		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<!-- Compiled and minified CSS -->
+		<!-- Compiled and minified CSS -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+			$( function() {
+				$("#grid-signed-date").datepicker();
+				$("#grid-expiration-date").datepicker();
+				$( "#menu" ).menu();
+			});
+		</script>
+	</head>
+	<body>
+		<div>
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

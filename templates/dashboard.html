@@ -1,0 +1,123 @@
+{% extends "main.html" %}
+{% block content %}
+
+    <!-- Dashboard -->
+    <div class="container max-w-4xl mx-auto m-24 shadow-2xl rounded-lg bg-blue-900">
+        <!-- <h3 class="text-center text-orange-700 m-4 text-2xl">Dashboard</h3> -->
+        {% include "header.html" %}
+
+        <div class="max-w-sm w-full lg:max-w-full h-full lg:flex">
+            <!-- side nav -->
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-bl-lg overflow-hidden">
+                <!-- welcome message -->
+                <div class="shadow-3xl p-2 bg-blue-800 mx-6 mt-3 mb-4 items-center justify-center text-white-500 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                    <span class="flex rounded-full bg-white uppercase px-2 py-1 text-xs font-bold mr-3">Hello</span>
+                    <span class="font-semibold mr-2 text-left flex-auto text-orange-500 text-xs">{{ current_user.username }}</span>
+                </div>
+                <!-- menu links -->
+                {% include "sidenav_menu.html" %}
+                <!-- end of menu links -->
+            </div>
+            <!-- end of side nav -->
+            <!-- big panel -->
+            <div class="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-br-lg p-4 flex flex-col justify-between leading-normal">
+                <div class="mb-8">
+
+                    <!-- verify the home navigation -->
+                    {% if nav=='home' %}
+                    <div class="bg-white px-8 pt-6 pb-8 mb-4">
+                        <h4 class="text-center text-xl p-5 text-black">All Contracts</h4>
+                        <table class="table-auto text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2">Company</th>
+                                    <th class="px-4 py-2">Address</th>
+                                    <th class="px-4 py-2">Mobile</th>
+                                    <!-- <th class="px-4 py-2">Contract Type</th> -->
+                                    <th class="px-4 py-2">Signed Date</th>
+                                    <th class="px-4 py-2">Expiration Date</th>
+                                    <th class="px-4 py-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for contract in contracts %}
+                                    <tr class="bg-gray-100 text-sm">
+                                        <td class="border px-4 py-2">{{ contract.company_name }}</td>
+                                        <td class="border px-4 py-2">{{ contract.company_address }}</td>
+                                        <td class="border px-4 py-2">{{ contract.company_mobile }}</td>
+                                        <!-- <td class="border px-4 py-2">{{ contract.contract_type }}</td> -->
+                                        <td class="border px-4 py-2">{{ contract.signed_date }}</td>
+                                        <td class="border px-4 py-2">{{ contract.expiration_date }}</td>
+                                        
+                                        <td>
+                                            <a href="{{url_for('editContract', companyName=contract.company_name)}}">
+                                                <!-- edit svg icon -->
+                                                <svg class="w-5 h-5 ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="-26 0 512 512">
+                                                    <path d="M142.188 10.3V512h253.957c35.527 0 64.328-28.8 64.328-64.328V10.3C460.473 4.613 455.859 0 450.172 0H152.488c-5.687 0-10.3 4.613-10.3 10.3zm0 0" fill="#e3f4ff"/>
+                                                    <path d="M460.477 10.3v437.376c0 35.52-28.805 64.324-64.332 64.324h-29.579c35.532 0 64.336-28.805 64.336-64.324V10.3C430.902 4.613 426.285 0 420.598 0h29.578c5.687 0 10.3 4.613 10.3 10.3zm0 0" fill="#bddff4"/>
+                                                    <path d="M317.434 421.492c5.687 0 10.3 4.61 10.3 10.301v15.883c0 35.523 28.801 64.324 64.325 64.324H73.754c-35.527 0-64.328-28.8-64.328-64.328v-15.879c0-5.688 4.61-10.3 10.3-10.3zm0 0" fill="#9cc6db"/>
+                                                    <path d="M231.117 173.863c0 10.332-8.379 18.707-18.71 18.707s-18.712-8.375-18.712-18.707c0-10.336 8.38-18.71 18.711-18.71s18.711 8.374 18.711 18.71zm0 0" fill="#f9b200"/>
+                                                    <g fill="#9cc6db">
+                                                        <path d="M299.945 183.246H262.09a7.724 7.724 0 01-7.727-7.726 7.723 7.723 0 017.727-7.723h37.855a7.723 7.723 0 017.727 7.723 7.724 7.724 0 01-7.727 7.726zm0 0M394.059 201.766h-131.97a7.724 7.724 0 01-7.726-7.727 7.726 7.726 0 017.727-7.726h131.969c4.27 0 7.726 3.46 7.726 7.726a7.724 7.724 0 01-7.726 7.727zm0 0M262.129 161.41c-4.246 0-7.738-3.426-7.766-7.68-.027-4.265 3.371-7.746 7.637-7.773h.128c4.243 0 7.7 3.426 7.727 7.676a7.732 7.732 0 01-7.68 7.777h-.046zm0 0"/>
+                                                    </g>
+                                                    <path d="M231.117 255.48c0 10.333-8.379 18.711-18.71 18.711s-18.712-8.378-18.712-18.71 8.38-18.711 18.711-18.711 18.711 8.378 18.711 18.71zm0 0" fill="#f9b200"/>
+                                                    <path d="M299.945 264.863H262.09a7.723 7.723 0 01-7.727-7.722 7.724 7.724 0 017.727-7.727h37.855a7.724 7.724 0 017.727 7.727 7.723 7.723 0 01-7.727 7.722zm0 0M394.059 283.383h-131.97a7.724 7.724 0 01-7.726-7.727 7.726 7.726 0 017.727-7.726h131.969c4.27 0 7.726 3.46 7.726 7.726a7.724 7.724 0 01-7.726 7.727zm0 0M262.129 243.027c-4.246 0-7.738-3.425-7.766-7.675-.027-4.27 3.371-7.75 7.637-7.778h.128c4.243 0 7.7 3.43 7.727 7.68a7.731 7.731 0 01-7.68 7.773h-.046zm0 0" fill="#9cc6db"/>
+                                                    <path d="M231.117 337.098c0 10.332-8.379 18.71-18.71 18.71s-18.712-8.378-18.712-18.71 8.38-18.711 18.711-18.711 18.711 8.379 18.711 18.71zm0 0" fill="#f9b200"/>
+                                                    <path d="M299.945 346.484H262.09a7.726 7.726 0 01-7.727-7.726 7.724 7.724 0 017.727-7.727h37.855a7.724 7.724 0 017.727 7.727 7.726 7.726 0 01-7.727 7.726zm0 0M394.059 365h-131.97a7.724 7.724 0 01-7.726-7.727 7.723 7.723 0 017.727-7.722h131.969a7.723 7.723 0 017.726 7.722A7.724 7.724 0 01394.06 365zm0 0M262.129 324.645c-4.246 0-7.738-3.426-7.766-7.676-.027-4.27 3.371-7.75 7.637-7.778h.128c4.243 0 7.7 3.43 7.727 7.68a7.731 7.731 0 01-7.68 7.774h-.046zm0 0" fill="#9cc6db"/>
+                                                    <path d="M395.32 93.523H207.34c-5.688 0-10.3-4.613-10.3-10.304V59.012c0-5.688 4.612-10.301 10.3-10.301h187.98c5.692 0 10.301 4.613 10.301 10.3V83.22c0 5.691-4.61 10.304-10.3 10.304zm0 0" fill="#fd6096"/>
+                                                    <path d="M142.223 287.637l33.172 16.492c3.703 1.84 7.746-1.793 6.312-5.672l-12.848-34.746zm0 0" fill="#4e7693"/>
+                                                    <path d="M135.09 285.602L1.95 137.379a7.606 7.606 0 01.573-10.742l21.188-19.032a7.606 7.606 0 0110.742.579l133.14 148.218a7.6 7.6 0 01-.577 10.743l-21.184 19.03a7.602 7.602 0 01-10.742-.573zm0 0" fill="#c0ff66"/>
+                                                    <path d="M135.09 285.602L1.95 137.379a7.606 7.606 0 01.573-10.742l10.594-9.516 143.305 159.54-10.59 9.515a7.602 7.602 0 01-10.742-.574zm0 0" fill="#9be058"/>
+                                                    <path d="M16.371 153.434L1.95 137.383a7.606 7.606 0 01.578-10.742l21.184-19.032a7.602 7.602 0 0110.742.575l14.422 16.054zm0 0" fill="#fd82ac"/>
+                                                </svg>
+                                                <!-- end of edit svg icon -->
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                    <!-- end of home navigation verification -->
+
+                    
+                    
+                    <!-- verify the clicked nav -->
+                    {% if nav=='register' %}
+                        <!-- injecting the registration form -->
+                        {% include "register.html" %}   
+                        <!-- end of registration form injection -->
+                    {% elif nav=='all_contracts' %}
+                        <!-- injecting the contract table view -->
+                        {% include "all_contract.html" %}
+                        <!-- end of all contract table view injection -->
+                    {% elif nav=='contract' %}
+                        <!-- injecting the new contract form -->
+                        {% include "create_contract.html" %}
+                        <!-- end of add a new contract form injection -->
+                    {% elif nav=='del_contracts' %} -->
+                        <!-- injecting the delete a contract -->
+                        {% include "delete_contract.html" %}
+                        <!-- end of delete contract page injection -->
+                    {% elif nav=='edit_contract' %}
+                        <!-- injecting the edit contract form -->
+                        {% include "edit_contract.html" %}
+                        <!-- end of edit contract form injection -->
+                    {% elif nav == 'user_account' %}
+                        <!-- injecting the user account -->
+                        {% include "user_account.html" %}
+                        <!-- end of user account injection -->
+                    {% endif %}
+                </div>
+            </div>
+            <!-- end of big panel -->
+        </div>
+
+    </div>
+    <!-- END OF Dashboard -->
+
+    <script>
+    </script>
+
+{% endblock %}

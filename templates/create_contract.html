@@ -1,0 +1,85 @@
+<!-- NEW CONTRACT FORM -->
+<form class="bg-white px-8 mx-24 pt-6 pb-8 mb-4" action="{{url_for('createContract')}}"
+    method="POST" enctype=multipart/form-data>
+                
+    <h4 class="text-center text-xl p-5 text-black">Add a new contract</h4>
+    <!-- getting the flsh message -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flex items-center rounded shadow-md bg-red-600 text-white text-sm font-bold px-4 py-2 mt-3 mb-6" role="alert">
+                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <p class="text-white">{{message}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <!-- company name and address inputs -->
+        <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-company-name">
+            <!-- Company Name -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-company-name" type="text" placeholder="Company Name" name="company_name">
+            <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+        </div>
+        <div class="w-full px-3 mb-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-address">
+            <!-- Address -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-address" type="text" placeholder="Address" name="company_address">
+        </div>
+        <!-- end of company name and address inputs -->
+
+        <!-- mobile number and contract inputs -->
+        <div class="w-1/2 px-3  mb-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-mobile">
+            <!-- Mobile -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-mobile" type="text" placeholder="Mobile Eg: +232-79-xxx" name="company_mobile">
+        </div>
+        <div class="w-1/2 px-3  mb-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-contract-subject">
+            <!-- Contract Subject -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-contract-subject" type="text" placeholder="Contract Subject" name="contract_type">
+        </div>
+        <!-- end of mobile number and contract inputs  -->
+
+        <!-- signed date and expiration date inputs -->
+        <div class="w-1/3 px-3  mb-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-signed-date">
+            <!-- Sigend Date -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-signed-date" type="text" placeholder="Signed Date" name="signed_date">
+        </div>
+        <div class="w-1/3 px-3  mb-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-expiration-date">
+            <!-- Expiration -->
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white hover:border-orange-500 cursor-pointer focus:border-orange-500"
+                id="grid-expiration-date" type="text" placeholder="Expiration Date" name="expiration_date">
+        </div>
+        <div class="w-1/3 px-3 -ml-2 mb-3">
+            <label class="w-32 h-12 px-3 py-5 mt-2 flex flex-col items-center bg-gray-200 text-blue-700 rounded-lg leading-tight border border-blue cursor-pointer hover:border-orange-500 hover:text-orange-500">
+                <svg class="w-8 h-8 -mt-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                </svg>
+                <span class="text-xs font-thin leading-normal -mb-5">Select a file</span>
+                <input type='file' name="file" class="hidden" />
+            </label>
+        </div>
+        <!-- end of signed date and expiration inputs -->
+    </div>
+    <div class="flex items-center justify-between">
+        <button class="mx-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 shadow-xl rounded focus:outline-none focus:shadow-outline" type="submit">
+            Add
+        </button>
+    </div>
+</form>
