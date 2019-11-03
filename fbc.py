@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# auth.py
+# auth.py 
+# Author: Muhammad M. Sesay
 
 from . import db
 from .models import User, Student, Faculty, Course, Module
@@ -20,6 +21,268 @@ CORS(fbc) # enable CORS on the auth blue print
 # generating a random string + digits as a token
 token = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in range(32))
+
+############################ SYSTEM ADMIN ROUTES #############################
+
+# system admin dashboard route
+@fbc.route('/system-admin/dashboard', methods=['GET'])
+def systemAdminDashboard():
+    # code goes here... maej
+    return make_response(jsonify('system admin dashboard page'))
+
+# all universities route
+@fbc.route('/system-admin/universities')
+def universities():
+    # code goes here... maej
+    return make_response(jsonify('all universites page'))
+
+# new university route
+@fbc.route('/system-admin/university/new')
+def newUniversity():
+    # code goes here... maej
+    return make_response(jsonify('new university page'))
+
+# single university route
+@fbc.route('/system-admin/university/<university_name>', methods=['GET','POST'])
+def singleUniversity(university_name):
+    # code goes here... maej
+    return make_response(jsonify('single university page'))
+
+# edit university route
+@fbc.route('/system-admin/university/<university_name>/edit', methods=['GET','POST'])
+def editUniversity(university_name):
+    # code goes here... maej
+    return make_response(jsonify('edit university page'))
+
+# delete university route
+@fbc.route('/system-admin/university/<university_name>/delete', methods=['GET','POST'])
+def deleteUniversity(university_name):
+    # code goes here... maej
+    return make_response(jsonify('delete univeresity page'))
+
+############################ END OF SYSTEM ADMIN ROUTES ######################
+
+############################ DEFAULT ROUTES ################################
+
+# index route
+@fbc.route('/usl/fbc')
+def index():
+    # code goes here... maej
+    return make_response(jsonify('fbc index page'))
+
+# about route
+@fbc.route('/usl/fbc/about')
+def about():
+    # code goes here... maej
+    return make_response(jsonify('fbc about page'))
+
+# contact route
+@fbc.route('/usl/fbc/contact')
+def contact():
+    # code goes here... maej
+    return make_response(jsonify('fbc contact page'))
+
+# login route
+@fbc.route('/usl/fbc/student/login', methods=['GET','POST'])
+@fbc.route('/usl/fbc/admin/login', methods=['GET','POST'])
+def login():
+    # code goes here... maej
+    return make_response(jsonify('fbc admin and student login page'))
+ 
+# logout route goes here
+@fbc.route('/usl/fbc/logout', methods=['GET','POST'])
+def logout():
+    # code goes here... maej
+    return make_response(jsonify('fbc logout page'))
+
+############################ END OF DEFAULT ROUTES ###########################
+
+# admin route
+@fbc.route('/usl/fbc/admin/dashboard')
+def adminDashboard():
+    # code goes here... maej
+    return make_response(jsonify('fbc admin dashboard page'))
+
+
+############################ FACULTY ROUTES #################################
+
+# all faculty route
+@fbc.route('/usl/fbc/faculty')
+def faculty():
+    # code goes here... maej
+    return make_response(jsonify('fbc faculty page'))
+
+# specific faculty route
+@fbc.route('/usl/fbc/faculty/<faculty_name>')
+def singleFaculty(faculty_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc single faculty page'))
+
+# new faculty route
+@fbc.route('/usl/fbc/faculty/new')
+def newFaculty():
+    # code goes here... maej
+    return make_response(jsonify('fbc new faculty page'))
+
+# edit faculty route
+@fbc.route('/usl/fbc/faculty/<faculty_name>/edit', methods=['GET','POST'])
+def editFaculty(faculty_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc edit faculty page'))
+
+# delete faculty route
+@fbc.route('/usl/fbc/faculty/<faculty_name>/delete', methods=['GET','POST'])
+def deleteFaculty(faculty_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc delete faculty page'))
+
+############################ END OF FACULTY ROUTES ###########################
+
+############################ COURSE ROUTES #################################
+
+# all course route
+@fbc.route('/usl/fbc/courses')
+def courses():
+    # code goes here... maej
+    return make_response(jsonify('fbc courses page'))
+
+# specific course route
+@fbc.route('/usl/fbc/courses/<course_name>')
+def singleCourse(course_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc single course page'))
+
+# new course route
+@fbc.route('/usl/fbc/courses/new')
+def newCourse():
+    # code goes here... maej
+    return make_response(jsonify('fbc new course page'))
+
+# edit course route
+@fbc.route('/usl/fbc/courses/<course_name>/edit', methods=['GET','POST'])
+def editCourse(course_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc edit course page'))
+
+# delete course route
+@fbc.route('/usl/fbc/courses/<course_name>/delete', methods=['GET','POST'])
+def deleteCourse(course_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc delete course page'))
+
+############################ END OF COURSE ROUTES ###########################
+
+############################ MODULE ROUTES #################################
+
+# all module route
+@fbc.route('/usl/fbc/modules')
+def modules():
+    # code goes here... maej
+    return make_response(jsonify('fbc modules page'))
+
+# specific module route
+@fbc.route('/usl/fbc/modules/<module_name>')
+def singleModule(module_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc single module page'))
+
+# new module route
+@fbc.route('/usl/fbc/modules/new')
+def newModule():
+    # code goes here... maej
+    return make_response(jsonify('fbc new module page'))
+
+# edit module route
+@fbc.route('/usl/fbc/modules/<module_name>/edit', methods=['GET','POST'])
+def editModule(module_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc edit module page'))
+
+# delete module route
+@fbc.route('/usl/fbc/modules/<module_name>/delete', methods=['GET','POST'])
+def deleteModule(module_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc delete module page'))
+
+############################ END OF MODULE ROUTES ###########################
+
+################## APPLICATION & REGISTRATION ROUTES ########################
+
+# all applicants route
+@fbc.route('/usl/fbc/courses/applicants')
+def applicants():
+    # code goes here... maej
+    return make_response(jsonify('fbc all applicants page'))
+
+# specific applicant's route
+@fbc.route('/usl/fbc/courses/applicants/<applicant_name>')
+def singleApplicant(applicant_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc single applicant page'))
+
+# registeration route
+@fbc.route('/usl/fbc/courses/registered')
+def registered():
+    # code goes here... maej
+    return make_response(jsonify('fbc all registered student page'))
+
+# specific registered student route
+@fbc.route('/usl/fbc/courses/registered/<student_name>', methods=['GET','POST'])
+def singleRegisteredStudent(student_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc single registered student page'))
+
+################## END OF APPLICATION & REGISTRATON ROUTES #######################
+
+################################ FEES ROUTES #####################################
+
+# course applicaation fee route
+@fbc.route('/usl/fbc/courses/<course_name>/application-fee', methods=['GET','POST'])
+def courseApplicationFee(course_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc course applicaton fee page'))
+
+# course tuition fee route
+@fbc.route('/usl/fbc/courses/<course_name>/tuition-fee', methods=['GET','POST'])
+def courseTuitionFee(course_name):
+    # code goes here... maej
+    return make_response(jsonify('fbc course tuition fee page'))
+
+################################ END OF FEES ROUTES ###############################
+
+################################ STUDENT ROUTES #####################################
+
+# student freshmen application route
+@fbc.route('/usl/fbc/freshmen/enrollment', methods=['GET','POST'])
+def freshmen():
+    # code goes here... maej
+    return make_response(jsonify('fbc freshmen application route'))
+
+# student dashboard route
+@fbc.route('/usl/fbc/student/dashboard', methods=['GET','POST'])
+def studentDashboard():
+    # code goes here... maej
+    return make_response(jsonify('fbc student dashboard'))
+
+# student profile route
+@fbc.route('/usl/fbc/student/profile', methods=['GET','POST'])
+def studentProfile():
+    # code goes here... maej
+    return make_response(jsonify('fbc student profile'))
+
+# student registration route
+@fbc.route('/usl/fbc/student/registration', methods=['GET','POST'])
+def studentRegistration():
+    # code goes here... maej
+    return make_response(jsonify('fbc student registration page'))
+
+# student payment route
+@fbc.route('/usl/fbc/student/pay-tuition', methods=['GET','POST'])
+def studentPayment():
+    # code goes here... maej
+    return make_response(jsonify('fbc student payment page'))
+
+################################ END OF STUDENT ROUTES ###############################
 
 # jobseeker login auth route
 # @fbc.route('/api/v1/portal/jsk/login', methods=['GET', 'POST'])

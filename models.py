@@ -240,7 +240,7 @@ class Application(db.Model):
 
 
     # fields definition
-    application_no = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     other_names = db.Column(db.String(100), nullable=True)
@@ -261,6 +261,9 @@ class Application(db.Model):
         nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'),
         nullable=False)
+    receipt_no = db.relationship('ApplicationFee', backref='application', lazy=True)
+
+    
 
 
     def __init__(self, first_name, last_name, other_names, email, phone,
@@ -319,7 +322,7 @@ class Registered(db.Model):
     # id = db.Column(db.Integer, primary_key=True)
     registration_no = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'),
-            nullable=True)
+            nullable=False)
     academic_year = db.Column(db.String(64), nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)  
@@ -329,3 +332,49 @@ class Registered(db.Model):
         self.registration_no = registration_no
         self.student_id = student_id
         self.academic_year = academic_year
+
+
+# Tuition class
+
+class Tuition(db.Model):
+    """This class defines the schema for the course tuition."""
+
+    # fields definition
+    # id = db.Column(db.Integer, primary_key=True)
+    receipt_no = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'),
+            nullable=False)
+    amount_paid = db.Column(db.Float, nullable=False)
+    balance = db.Column(db.Float, nullable=False)
+    academic_year = db.Column(db.String(64), nullable=False)
+    registered_on = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)  
+
+    # constructor
+    def __init__(self, receipt_no, student_id, amount_paid, balance, academic_year):
+        self.receipt_no = receipt_no
+        self.student_id = student_id
+        self.amount_paid = amount_paid
+        self.balance = balance
+        self.academic_year = academic_year
+
+
+# Application Fee class
+
+class ApplicationFee(db.Model):
+    """This class defines the schema for the course applcation fee."""
+
+    # fields definition
+    # id = db.Column(db.Integer, primary_key=True)
+    receipt_no = db.Column(db.Integer, primary_key=True)
+    application_no = db.Column(db.Integer, db.ForeignKey('application.id'),
+            nullable=False)
+    amount_paid = db.Column(db.Float, nullable=False)
+    registered_on = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)  
+
+    # constructor
+    def __init__(self, receipt_no, application_no, amount_paid):
+        self.receipt_no = receipt_no
+        self.application_no = application_no
+        self.amount_paid = amount_paid
